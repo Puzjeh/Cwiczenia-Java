@@ -8,9 +8,8 @@ public class main {
 
     public static void zapiszObiekty(Object[] objects, String path) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(path));
+            FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeInt(objects.length);
             for (Object obj : objects) {
                 objectOutputStream.writeObject(obj);
             }
@@ -30,20 +29,20 @@ public class main {
         FileInputStream fileInputStream = new FileInputStream(nazwaPliku);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         ArrayList<Object> obiekty = new ArrayList<>();
-        int liczbaObiektow = objectInputStream.readInt();
-        for (int i = 0; i < liczbaObiektow; i++) {
+        boolean tip = true;
+        while(tip) {
             try {
                 Object obiekt = objectInputStream.readObject();
                 obiekty.add(obiekt);
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println(e);
+                tip = false;
             }
         }
         objectInputStream.close();
         fileInputStream.close();
 
-        Lista[] loadedList = new Lista[liczbaObiektow];
-        for(int i = 0; i < liczbaObiektow; i++){
+        Lista[] loadedList = new Lista[obiekty.size()];
+        for(int i = 0; i < obiekty.size(); i++){
             if (obiekty.get(i) instanceof Lista){
                 Lista listaa = new Lista((Lista) obiekty.get(i));
                 loadedList[i] = listaa;
@@ -55,7 +54,7 @@ public class main {
         return loadedList;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Lista list1 = new Lista(new int[] {1,2,3}, 5);
         System.out.println(list1.getRozmiar());
         System.out.println(list1.getPojemnosc());

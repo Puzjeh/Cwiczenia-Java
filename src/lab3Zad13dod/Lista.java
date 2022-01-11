@@ -1,6 +1,6 @@
 package lab3Zad13dod;
 
-import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -50,7 +50,7 @@ public class Lista implements Serializable {
     }
 
     public void ZapiszDoPliku(String f) throws IOException {
-        FileWriter fi = new FileWriter(new File(f));
+        FileWriter fi = new FileWriter((f));
         for(int i : getLiczby()){
             fi.write(Integer.toString(i));
         }
