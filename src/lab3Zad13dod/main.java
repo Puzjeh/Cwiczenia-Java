@@ -6,9 +6,8 @@ import java.util.ArrayList;
 public class main {
 
 
-    public static void zapiszObiekty(Object[] objects) {
+    public static void zapiszObiekty(Object[] objects, String path) {
         try {
-            String path = "myObjects.obj";
             FileOutputStream fileOutputStream = new FileOutputStream(new File(path));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeInt(objects.length);
@@ -17,7 +16,7 @@ public class main {
             }
             objectOutputStream.close();
             fileOutputStream.close();
-            System.out.println("0");
+            System.out.println("0, zapis sie powiodl");
         }
         catch (FileNotFoundException e){
             System.out.println("Nie znaleziono sciezki");
@@ -26,7 +25,7 @@ public class main {
         }
     }
 
-    public static void odczytajObiekty(String nazwaPliku) throws IOException {
+    public static Lista[] odczytajObiekty(String nazwaPliku) throws IOException {
 
         FileInputStream fileInputStream = new FileInputStream(nazwaPliku);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -43,16 +42,17 @@ public class main {
         objectInputStream.close();
         fileInputStream.close();
 
-
-        for(Object obj : obiekty){
-            if (obj instanceof Lista){
-                Lista listaa = (Lista) obj;
-                System.out.println(listaa.getPojemnosc());
+        Lista[] loadedList = new Lista[liczbaObiektow];
+        for(int i = 0; i < liczbaObiektow; i++){
+            if (obiekty.get(i) instanceof Lista){
+                Lista listaa = new Lista((Lista) obiekty.get(i));
+                loadedList[i] = listaa;
             }
             else{
                 System.out.println("nie znam");
             }
         }
+        return loadedList;
     }
 
     public static void main(String[] args) throws IOException {
@@ -66,9 +66,16 @@ public class main {
 
         Lista list2 = new Lista(new int[]{10, 9, 8, 7, 6, 5}, 8);
 
-        Object[] listArr = new Object[]{list1, list2};
+        Lista[] listArr = new Lista[]{list1, list2};
         list1.ZapiszDoPliku("f.txt");
-        zapiszObiekty(listArr);
-        odczytajObiekty("myObjects.obj");
+        zapiszObiekty(listArr, "myLists.obj");
+        Lista[] loadedList = odczytajObiekty("myLists.obj");
+        for(Lista c : loadedList){
+            int[] arr = c.getLiczby();
+            for(int d : arr){
+                System.out.print(d + " ");
+            }
+            System.out.println(" ");
+        }
     }
 }

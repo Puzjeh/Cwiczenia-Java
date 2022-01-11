@@ -3,8 +3,9 @@ package lab3Zad13dod;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Lista {
+public class Lista implements Serializable {
     private int[]liczby;
     private int pojemnosc;
     private int rozmiar;
@@ -12,7 +13,11 @@ public class Lista {
     public Lista(int[] liczby, int pojemnosc) {
         this.liczby = liczby;
         this.pojemnosc = pojemnosc;
-        this.rozmiar = liczby.length;
+    }
+
+    public Lista(Lista lista){
+        this.liczby = lista.getLiczby();
+        this.pojemnosc = lista.getPojemnosc();
     }
 
     public int[] getLiczby() {
@@ -24,7 +29,7 @@ public class Lista {
     }
 
     public int getRozmiar() {
-        return rozmiar;
+        return liczby.length;
     }
 
     public void setLiczby(int[] liczby) {
