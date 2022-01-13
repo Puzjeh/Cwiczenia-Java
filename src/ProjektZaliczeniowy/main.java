@@ -12,10 +12,15 @@ public class main {
             ObslugaPlikow.GenerujBaze();
             gwiazdozbiory = ObslugaPlikow.OdczytajBaze();
         }
-        for(Gwiazdozbior g : gwiazdozbiory){
-            for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
-                System.out.println(gw.toString());
-            }
-        }
+
+
+
+
+        Gwiazdozbior.WyswietlWszystkieGwiazdy(gwiazdozbiory);
+        Gwiazdozbior.WyswietlNazwyGwiazdozbiorow(gwiazdozbiory);
+        Gwiazdozbior.UsunGwiazde(gwiazdozbiory);
+        Gwiazdozbior.WyswietlWszystkieGwiazdy(gwiazdozbiory);
+        Gwiazdozbior.UsunGwiazde(gwiazdozbiory);
+        Gwiazdozbior.WyswietlWszystkieGwiazdy(gwiazdozbiory);
     }
 }

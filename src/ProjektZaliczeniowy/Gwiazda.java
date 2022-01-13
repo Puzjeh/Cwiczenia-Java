@@ -35,6 +35,20 @@ public class Gwiazda implements Serializable {
         this.polkula = setPolkula();
     }
 
+    public Gwiazda(Gwiazda drugaGwiazda) {
+        this.nazwa = drugaGwiazda.getNazwa();
+        this.nazwaKatalogowa = drugaGwiazda.getNazwaKatalogowa();
+        this.deklinacja = drugaGwiazda.getDeklinacja();
+        this.rektascensja = drugaGwiazda.getRektascensja();
+        this.obserwowanaWielkoscGwiazdowa = drugaGwiazda.getObserwowanaWielkoscGwiazdowa();
+        this.absolutnaWielkoscGwiazdowa = drugaGwiazda.getAbsolutnaWielkoscGwiazdowa();
+        this.odlegloscwLatachSwietlnych = drugaGwiazda.getOdlegloscwLatachSwietlnych();
+        this.gwiazdozbior = drugaGwiazda.getGwiazdozbior();
+        this.polkula = drugaGwiazda.getPolkula();
+        this.temperatura = drugaGwiazda.getTemperatura();
+        this.masa = drugaGwiazda.getMasa();
+    }
+
     public String getNazwa() {
 
         return nazwa;

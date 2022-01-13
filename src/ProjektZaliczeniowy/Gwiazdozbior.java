@@ -59,8 +59,43 @@ public class Gwiazdozbior implements Serializable {
     public ArrayList<Gwiazda> SortujGwiazdy(){
         ArrayList<Gwiazda> posortowaneNazwy = getGwiazdywGwiazdozbiorze();
         for(int i = 0; i< posortowaneNazwy.size();i++){
-            posortowaneNazwy.get(i).setNazwaKatalogowa(map.get(i) + " "+ getNazwaGwiazdozbioru());
+            posortowaneNazwy.get(i).setNazwaKatalogowa(map.get(i).toUpperCase() + " "+ getNazwaGwiazdozbioru().toUpperCase());
         }
         return posortowaneNazwy;
     }
+
+    public static void WyswietlWszystkieGwiazdy(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        for(Gwiazdozbior g : gwiazdozbiory){
+            for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
+                System.out.println(gw.toString());
+            }
+
+        }
+    }
+
+    public static void WyswietlNazwyGwiazdozbiorow(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        for(Gwiazdozbior g : gwiazdozbiory){
+            System.out.println(g.getNazwaGwiazdozbioru());
+        }
+    }
+
+    public static void UsunGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        String numerKatalogowy = "ALFA HYDRA";
+        Gwiazda doUsuniecia = new Gwiazda();
+
+
+        for(Gwiazdozbior g : gwiazdozbiory) {
+            for (Gwiazda gw : g.getGwiazdywGwiazdozbiorze()) {
+                if (gw.getNazwaKatalogowa().equals(numerKatalogowy)) {
+                    doUsuniecia = gw;
+                }
+            }
+            if(g.getGwiazdywGwiazdozbiorze().remove(doUsuniecia)){
+                System.out.println("Gwiazda zostala usunieta");
+            }
+            g.setGwiazdywGwiazdozbiorze(g.SortujGwiazdy());
+        }
+
+    }
+
 }

@@ -50,7 +50,7 @@ public class ObslugaPlikow {
             }
             objectOutputStream.close();
             fileOutputStream.close();
-            System.out.println("0, zapis sie powiodl");
+            System.out.println("0, Baza zostala wygenerowana");
         }
         catch (FileNotFoundException e){
             System.out.println("Nie znaleziono sciezki");
@@ -85,6 +85,7 @@ public class ObslugaPlikow {
         for(Gwiazdozbior g : gwiazdozbiory){
             g.setGwiazdywGwiazdozbiorze(g.SortujGwiazdy());
         }
+        System.out.println("Baza zostala odczytana");
         return gwiazdozbiory;
     }
 }
