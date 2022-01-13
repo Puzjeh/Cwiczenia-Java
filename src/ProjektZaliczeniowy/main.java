@@ -5,15 +5,17 @@ import java.util.ArrayList;
 
 public class main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        ArrayList<Gwiazda>Gwiazdy;
+        ArrayList<Gwiazdozbior>gwiazdozbiory;
         try{
-            Gwiazdy = ObslugaPlikow.OdczytajBaze();
+            gwiazdozbiory = ObslugaPlikow.OdczytajBaze();
         }catch (IOException e){
             ObslugaPlikow.GenerujBaze();
-            Gwiazdy = ObslugaPlikow.OdczytajBaze();
+            gwiazdozbiory = ObslugaPlikow.OdczytajBaze();
         }
-        for(Gwiazda g : Gwiazdy){
-            System.out.println(g.toString());
+        for(Gwiazdozbior g : gwiazdozbiory){
+            for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
+                System.out.println(gw.toString());
+            }
         }
     }
 }

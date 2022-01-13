@@ -2,6 +2,7 @@ package ProjektZaliczeniowy;
 
 import java.io.Serializable;
 
+
 public class Gwiazda implements Serializable {
     private String nazwa;
     private String nazwaKatalogowa;
@@ -15,6 +16,10 @@ public class Gwiazda implements Serializable {
     private double temperatura;
     private double masa;
 
+    public Gwiazda() {
+
+    }
+
     public Gwiazda(String nazwa, int stopnie, int minuty, double sekundy, int godziny, int minutyy, int sekundyy,
                    double obserwowanaWielkoscGwiazdowa, double odlegloscwLatachSwietlnych, String gwiazdozbior,
                    double temperatura, double masa) {
@@ -27,11 +32,11 @@ public class Gwiazda implements Serializable {
         this.temperatura = temperatura;
         this.masa = masa;
         this.absolutnaWielkoscGwiazdowa = setAbsolutnaWielkoscGwiazdowa();
-        this.nazwaKatalogowa = setNazwaKatalogowa();
         this.polkula = setPolkula();
     }
 
     public String getNazwa() {
+
         return nazwa;
     }
 
@@ -59,8 +64,8 @@ public class Gwiazda implements Serializable {
         return nazwaKatalogowa;
     }
 
-    public String setNazwaKatalogowa() {
-        return this.nazwaKatalogowa = "Alfa "+getGwiazdozbior();
+    public String setNazwaKatalogowa(String nowaNazwa) {
+        return this.nazwaKatalogowa = nowaNazwa;
     }
 
     public Wspolrzedne1 getDeklinacja() {
