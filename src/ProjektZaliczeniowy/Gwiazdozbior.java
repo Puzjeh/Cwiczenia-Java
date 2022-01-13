@@ -82,7 +82,7 @@ public class Gwiazdozbior implements Serializable {
     public static void UsunGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory){
         String numerKatalogowy = "ALFA HYDRA";
         Gwiazda doUsuniecia = new Gwiazda();
-
+        boolean tmp = false;
 
         for(Gwiazdozbior g : gwiazdozbiory) {
             for (Gwiazda gw : g.getGwiazdywGwiazdozbiorze()) {
@@ -91,9 +91,14 @@ public class Gwiazdozbior implements Serializable {
                 }
             }
             if(g.getGwiazdywGwiazdozbiorze().remove(doUsuniecia)){
-                System.out.println("Gwiazda zostala usunieta");
+                tmp = true;
             }
             g.setGwiazdywGwiazdozbiorze(g.SortujGwiazdy());
+        }
+        if(tmp){
+            System.out.println("Gwiazda zostala usunieta");
+        }else{
+            System.out.println("Nie znaleziono takiej gwiazdy");
         }
 
     }
