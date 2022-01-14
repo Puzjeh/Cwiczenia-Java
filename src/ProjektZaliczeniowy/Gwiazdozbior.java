@@ -175,6 +175,40 @@ public class Gwiazdozbior implements Serializable {
         }
     }
 
+    public static void WyswietlGwiazdyWedlugPolkuli(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        boolean tmp = true;
+        boolean czyJestGwiazda = false;
+        while(tmp){
+            System.out.println("Wybierz polkule, z ktorej gwiazda jest widoczna (PN/PD)");
+            System.out.println("0--Wroc");
+            try{
+                Scanner scanner = new Scanner(System.in);
+                String polkula = scanner.nextLine();
+                if(polkula.equalsIgnoreCase("0")){
+                    break;
+                }else if(polkula.equalsIgnoreCase("PN") || polkula.equalsIgnoreCase("PD")){
+                    for (Gwiazdozbior g : gwiazdozbiory){
+                        for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
+                            if(gw.getPolkula().equalsIgnoreCase(polkula)){
+                                System.out.println(gw.toString());
+                                tmp = false;
+                                czyJestGwiazda = true;
+                            }
+                        }
+                    }
+                }else{
+                    System.out.println("Nie ma takiej polkuli");
+                }
+                if(!czyJestGwiazda){
+                    System.out.println("Nie ma gwiazd widocznych z tej polkuli");
+                }
+            }catch (InputMismatchException e){
+                System.out.println("Podales wartosc w zlym formacie");
+            }
+
+        }
+    }
+
     public static void WyswietlNazwyGwiazdozbiorow(ArrayList<Gwiazdozbior> gwiazdozbiory){
         System.out.println("Gwiazdozbiory w bazie:");
         for(Gwiazdozbior g : gwiazdozbiory){
@@ -191,7 +225,7 @@ public class Gwiazdozbior implements Serializable {
             System.out.println("0--Wroc");
             Scanner scanner = new Scanner(System.in);
             String wybor = scanner.nextLine();
-            if(wybor.toCharArray()[0] == '0'){
+            if(wybor.equalsIgnoreCase("0")){
                 break;
             }else{
                 for(Gwiazdozbior g : gwiazdozbiory){
@@ -210,6 +244,21 @@ public class Gwiazdozbior implements Serializable {
         }
     }
 
+    public static void WyswietlSupernowe(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        int ileGwiazd = 0;
+        for(Gwiazdozbior g : gwiazdozbiory){
+            for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
+                if(gw.getMasa()>1.44){
+                    System.out.println(gw);
+                    ileGwiazd++;
+                }
+            }
+        }
+        if(ileGwiazd == 0){
+            System.out.println("W bazie nie ma potencjalnych supernow");
+        }
+    }
+
     public static void UsunGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory){
 
         boolean deleteLoop = true;
@@ -219,13 +268,13 @@ public class Gwiazdozbior implements Serializable {
             Scanner scanner = new Scanner(System.in);
             String gwiazda = scanner.nextLine();
             boolean tmp = true;
-            if(gwiazda.toCharArray()[0] == '0'){
+            if(gwiazda.equalsIgnoreCase("0")){
                 break;
             }else{
                 Gwiazda doUsuniecia = new Gwiazda();
                 for(Gwiazdozbior g : gwiazdozbiory) {
                     for (Gwiazda gw : g.getGwiazdywGwiazdozbiorze()) {
-                        if (gw.getNazwaKatalogowa().equals(gwiazda.toUpperCase())) {
+                        if (gw.getNazwaKatalogowa().equalsIgnoreCase(gwiazda)) {
                             doUsuniecia = gw;
                         }
                     }
@@ -255,16 +304,20 @@ public class Gwiazdozbior implements Serializable {
             System.out.println("4--Wyswietl gwiazdy w zadanej odleglosci");
             System.out.println("5--Wyswietl gwiazdy z przedziału temperatury");
             System.out.println("6--Wyswietl gwiazdy z przedzialu obserwowanej wielkosci gwiazdowej");
+            System.out.println("7--Wyswietl gwiazdy widoczne z danej polkuli");
+            System.out.println("8--Wyswietl potencjalne supernowe");
             System.out.println("0--Wroc");
             Scanner scanner = new Scanner(System.in);
             int wyswietl = scanner.nextInt();
             switch (wyswietl) {
-                case 1 -> Gwiazdozbior.WyswietlWszystkieGwiazdy(gwiazdozbiory);
-                case 2 -> Gwiazdozbior.WyswietlNazwyGwiazdozbiorow(gwiazdozbiory);
-                case 3 -> Gwiazdozbior.WyswietlGwiazdywGwiazdozbiorze(gwiazdozbiory);
-                case 4 -> Gwiazdozbior.WyswietlGwiazdywOdleglosci(gwiazdozbiory);
-                case 5 -> Gwiazdozbior.WyswietlGwiazdywPrzedzialeTemperatury(gwiazdozbiory);
-                case 6 -> Gwiazdozbior.WyswietlGwiazdywPrzedzialeWielkosci(gwiazdozbiory);
+                case 1 -> WyswietlWszystkieGwiazdy(gwiazdozbiory);
+                case 2 -> WyswietlNazwyGwiazdozbiorow(gwiazdozbiory);
+                case 3 -> WyswietlGwiazdywGwiazdozbiorze(gwiazdozbiory);
+                case 4 -> WyswietlGwiazdywOdleglosci(gwiazdozbiory);
+                case 5 -> WyswietlGwiazdywPrzedzialeTemperatury(gwiazdozbiory);
+                case 6 -> WyswietlGwiazdywPrzedzialeWielkosci(gwiazdozbiory);
+                case 7 -> WyswietlGwiazdyWedlugPolkuli(gwiazdozbiory);
+                case 8 -> WyswietlSupernowe(gwiazdozbiory);
                 case 0 -> showLoop = false;
                 default -> System.out.println("Nie ma takiej funkcji");
             }
