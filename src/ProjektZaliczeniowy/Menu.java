@@ -9,6 +9,7 @@ public class Menu {
         System.out.println("1--Wyswietl");
         System.out.println("2--Usun gwiazde");
         System.out.println("3--Dodaj gwiazde");
+        System.out.println("4--Zapisz wszystkie gwiazdy do pliku .txt");
         System.out.println("0--Zapisz i zakoncz program");
     }
     public static void Start() throws IOException {
@@ -30,8 +31,12 @@ public class Menu {
             switch (wybor) {
                 case 1 -> Gwiazdozbior.Wyswietl(gwiazdozbiory);
                 case 2 -> Gwiazdozbior.UsunGwiazde(gwiazdozbiory);
-                //case 3 ->
-                case 0 -> menu=false;
+                case 3 -> Gwiazdozbior.DodajGwiazde(gwiazdozbiory);
+                case 4 -> ObslugaPlikow.ZapiszDoPlikuTXT(gwiazdozbiory);
+                case 0 -> {
+                    ObslugaPlikow.ZapiszZmiany(gwiazdozbiory);
+                    menu=false;
+                }
                 default -> System.out.println("Nie ma takiej funkcji");
             }
         }

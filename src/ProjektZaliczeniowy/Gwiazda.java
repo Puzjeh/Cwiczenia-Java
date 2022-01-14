@@ -24,8 +24,8 @@ public class Gwiazda implements Serializable {
                    double obserwowanaWielkoscGwiazdowa, double odlegloscwLatachSwietlnych, String gwiazdozbior,
                    double temperatura, double masa) {
         this.nazwa = nazwa;
-        this.deklinacja = setDeklinacja(stopnie, minuty, sekundy);
-        this.rektascensja = setRektascensja(godziny, minutyy, sekundyy);
+        this.deklinacja = new Wspolrzedne1(stopnie, minuty, sekundy);
+        this.rektascensja = new Wspolrzedne2(godziny, minutyy, sekundyy);
         this.obserwowanaWielkoscGwiazdowa = obserwowanaWielkoscGwiazdowa;
         this.odlegloscwLatachSwietlnych = odlegloscwLatachSwietlnych;
         this.gwiazdozbior = gwiazdozbior;
@@ -55,58 +55,31 @@ public class Gwiazda implements Serializable {
     }
 
     public void setNazwa(String nazwa) {
-        char[] znaki = nazwa.toCharArray();
-        int ileLiter = 0;
-        int ileCyfr = 0;
-        for(char c : znaki){
-            if(c>=48 && c<=57){
-                ileCyfr++;
-            }
-            else if(c>=65 && c<=90){
-                ileLiter++;
-            }
-        }
-        if(ileLiter != 3 || ileCyfr != 4){
-            System.out.println("Błedna nazwa");
-        }
-        else{
-            this.nazwa = nazwa;
-        }
+        this.nazwa = nazwa;
     }
 
     public String getNazwaKatalogowa() {
         return nazwaKatalogowa;
     }
 
-    public String setNazwaKatalogowa(String nowaNazwa) {
-        return this.nazwaKatalogowa = nowaNazwa;
+    public void setNazwaKatalogowa(String nowaNazwa) {
+        this.nazwaKatalogowa = nowaNazwa;
     }
 
     public Wspolrzedne1 getDeklinacja() {
         return deklinacja;
     }
 
-    public Wspolrzedne1 setDeklinacja(int stopnie, int minuty, double sekundy) {
-        if(stopnie >=-90 && stopnie <=90 && minuty >=-60 && minuty <=60 &&
-                sekundy >=-60 && sekundy <=60){
-            this.deklinacja = new Wspolrzedne1(stopnie, minuty, sekundy);
-        }else{
-            System.out.println("Niepoprawne wartosci wspolrzednej");
-        }
-        return this.deklinacja;
+    public void setDeklinacja(int stopnie, int minuty, double sekundy) {
+        this.deklinacja = new Wspolrzedne1(stopnie, minuty, sekundy);
     }
 
     public Wspolrzedne2 getRektascensja() {
         return rektascensja;
     }
 
-    public Wspolrzedne2 setRektascensja(int godziny, int minutyy, int sekundyy) {
-        if(godziny>=0 && godziny <=24 && minutyy>=0 && minutyy<=60 && sekundyy>=0&&sekundyy<=60){
-            this.rektascensja = new Wspolrzedne2(godziny, minutyy, sekundyy);
-        }else{
-            System.out.println("Niepoprawne wartosci wspolrzednej");
-        }
-        return this.rektascensja;
+    public void setRektascensja(int godziny, int minutyy, int sekundyy) {
+        this.rektascensja = new Wspolrzedne2(godziny, minutyy, sekundyy);
     }
 
     public double getObserwowanaWielkoscGwiazdowa() {
@@ -114,11 +87,7 @@ public class Gwiazda implements Serializable {
     }
 
     public void setObserwowanaWielkoscGwiazdowa(double obserwowanaWielkoscGwiazdowa) {
-        if(obserwowanaWielkoscGwiazdowa>=-26.74 && obserwowanaWielkoscGwiazdowa<=15.00){
-            this.obserwowanaWielkoscGwiazdowa = obserwowanaWielkoscGwiazdowa;
-        }else{
-            System.out.println("Wartosc spoza zakresu");
-        }
+        this.obserwowanaWielkoscGwiazdowa = obserwowanaWielkoscGwiazdowa;
     }
 
     public double getAbsolutnaWielkoscGwiazdowa() {
@@ -135,11 +104,7 @@ public class Gwiazda implements Serializable {
     }
 
     public void setOdlegloscwLatachSwietlnych(double odlegloscwLatachSwietlnych) {
-        if(odlegloscwLatachSwietlnych>0){
-            this.odlegloscwLatachSwietlnych = odlegloscwLatachSwietlnych;
-        }else{
-            System.out.println("Odleglosc nie moze byc wartoscia ujemna");
-        }
+        this.odlegloscwLatachSwietlnych = odlegloscwLatachSwietlnych;
 
     }
 
@@ -184,12 +149,7 @@ public class Gwiazda implements Serializable {
     }
 
     public void setTemperatura(double temperatura) {
-        if(temperatura>=2000){
-            this.temperatura = temperatura;
-        }else{
-            System.out.println("Temperatura gwiazdy nie moze byc nizsza niz 2000*C");
-        }
-
+        this.temperatura = temperatura;
     }
 
     public double getMasa() {
@@ -197,13 +157,7 @@ public class Gwiazda implements Serializable {
     }
 
     public void setMasa(double masa) {
-        if(masa<0.1){
-            System.out.println("Minimalna masa to 0.1");
-        }else if(masa >50){
-            System.out.println("Maksymalna masa to 50");
-        }else{
-            this.masa = masa;
-        }
+        this.masa=masa;
     }
 
     @Override

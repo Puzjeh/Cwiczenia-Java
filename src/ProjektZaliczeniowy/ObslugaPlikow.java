@@ -88,5 +88,40 @@ public class ObslugaPlikow {
         System.out.println("Baza zostala odczytana");
         return gwiazdozbiory;
     }
+
+    public static void ZapiszZmiany(ArrayList<Gwiazdozbior> gwiazdozbiory){
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("bazaGwiazd.obj");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            for (Object obiekt : gwiazdozbiory) {
+                objectOutputStream.writeObject(obiekt);
+            }
+            objectOutputStream.close();
+            fileOutputStream.close();
+            System.out.println("Zapisano zmiany");
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Nie znaleziono sciezki");
+        } catch (IOException e){
+            System.out.println(e);
+            System.out.println("-1");
+        }
+    }
+
+    public static void ZapiszDoPlikuTXT(ArrayList<Gwiazdozbior> gwiazdozbiory) throws IOException {
+        try {
+            FileWriter fi = new FileWriter(("Gwiazdy.txt"));
+            for (Gwiazdozbior g : gwiazdozbiory) {
+                for (Gwiazda gw : g.getGwiazdywGwiazdozbiorze()) {
+                    fi.write(gw.toString() + "\n");
+
+                }
+            }
+            fi.close();
+            System.out.println("Gwiazdy zapisano do pliku Gwiazdy.txt");
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 }
 

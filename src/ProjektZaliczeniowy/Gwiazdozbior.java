@@ -10,6 +10,9 @@ public class Gwiazdozbior implements Serializable {
     private String nazwaGwiazdozbioru;
     private ArrayList<Gwiazda> gwiazdywGwiazdozbiorze;
 
+    public Gwiazdozbior() {
+    }
+
     public String getNazwaGwiazdozbioru() {
         return nazwaGwiazdozbioru;
     }
@@ -147,6 +150,7 @@ public class Gwiazdozbior implements Serializable {
         while(tmp){
             System.out.println("Podaj minimalna obserwowana wielkosc gwiazdowa, zatwierdz, nastepnie podaj maksymalna wielkosc");
             System.out.println("Minimalna obserwowana wielkosc gwiazdowa wynosi -26.74, natomiast maksymalna 15.0");
+            System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
             System.out.println("0--Wroc");
             try{
                 Scanner scanner = new Scanner(System.in);
@@ -294,6 +298,181 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
+
+    public static void DodajGwiazdozbior(ArrayList<Gwiazdozbior> gwiazdozbiory, String nazwa, ArrayList<Gwiazda> gwiazdy){
+        Gwiazdozbior nowyGwiazdozbior = new Gwiazdozbior();
+        nowyGwiazdozbior.setNazwaGwiazdozbioru(nazwa);
+        nowyGwiazdozbior.setGwiazdywGwiazdozbiorze(gwiazdy);
+        gwiazdozbiory.add(nowyGwiazdozbior);
+    }
+
+    public static void DodajGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory) {
+        try {
+            boolean addLoop = true;
+            while (addLoop) {
+                Gwiazda nowaGwiazda = new Gwiazda();
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("1--Wybierz gwiazdozbior z bazy");
+                System.out.println("2--Stworz nowy gwiazdozbior");
+                System.out.println("0--Wroc do menu");
+                int wybor = scanner.nextInt();
+                if (wybor == 0) {
+                    addLoop = false;
+                } else if (wybor == 1) {
+                    WyswietlNazwyGwiazdozbiorow(gwiazdozbiory);
+                    Scanner scanner1 = new Scanner(System.in);
+                    System.out.println("Podaj nazwe gwiazdozbioru");
+                    String nazwaGwiazdozbioru = scanner1.nextLine();
+                    int czyJestGwiazdozbior = 0;
+                    for (Gwiazdozbior g : gwiazdozbiory) {
+                        if (g.getNazwaGwiazdozbioru().contains(nazwaGwiazdozbioru.toUpperCase())) {
+                            czyJestGwiazdozbior++;
+                            boolean tmp = false;
+                            while (!tmp) {
+                                System.out.println("Nazwa gwiazdy powinna skladac sie z 3 duzych liter i 4 cyfr");
+                                System.out.println("Podaj nazwe gwiazdy");
+                                String nazwa = scanner1.nextLine();
+                                char[] znaki = nazwa.toCharArray();
+                                int ileLiter = 0;
+                                int ileCyfr = 0;
+                                for (char c : znaki) {
+                                    if (c >= 48 && c <= 57) {
+                                        ileCyfr++;
+                                    } else if (c >= 65 && c <= 90) {
+                                        ileLiter++;
+                                    }
+                                }
+                                if (ileLiter != 3 || ileCyfr != 4) {
+                                    System.out.println("Błedna nazwa");
+                                } else {
+                                    nowaGwiazda.setNazwa(nazwa);
+                                    tmp = true;
+                                }
+                            }
+
+                            tmp = false;
+
+                            while (!tmp) {
+
+                                System.out.println("Podaj deklinacje (stopnie, minuty, sekundy");
+                                System.out.println("Kazda wartosc zatwierdz");
+                                System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
+                                int stopnie = scanner.nextInt();
+                                int minuty = scanner1.nextInt();
+                                double sekundy = scanner1.nextDouble();
+                                if (stopnie >= -90 && stopnie <= 90 && minuty >= -60 && minuty <= 60 &&
+                                        sekundy >= -60 && sekundy <= 60) {
+                                    nowaGwiazda.setDeklinacja(stopnie, minuty, sekundy);
+                                    tmp = true;
+                                } else {
+                                    System.out.println("Niepoprawne wartosci wspolrzednej");
+                                }
+
+                            }
+                            tmp = false;
+
+                            while (!tmp) {
+
+                                System.out.println("Podaj rektascensje (godziny, minuty, sekundy");
+                                int godziny = scanner.nextInt();
+                                int minuty = scanner1.nextInt();
+                                int sekundy = scanner1.nextInt();
+                                if (godziny >= 0 && godziny <= 24 && minuty >= 0 && minuty <= 60 && sekundy >= 0 && sekundy <= 60) {
+                                    nowaGwiazda.setRektascensja(godziny, minuty, sekundy);
+                                    tmp = true;
+                                } else {
+                                    System.out.println("Niepoprawne wartosci wspolrzednej");
+                                }
+
+                            }
+                            tmp = false;
+
+                            while (!tmp) {
+
+                                System.out.println("Obserwowana wielkosc gwiazdowa przyjmuje wartosci od -26.74 do 15.0");
+                                System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
+                                System.out.println("Podaj obserwowana wielkosc gwiazdowa");
+                                double wielkosc = scanner1.nextDouble();
+                                if (wielkosc >= -26.74 && wielkosc <= 15.00) {
+                                    nowaGwiazda.setObserwowanaWielkoscGwiazdowa(wielkosc);
+                                    tmp = true;
+                                } else {
+                                    System.out.println("Wartosc spoza zakresu");
+                                }
+
+                            }
+                            tmp = false;
+
+                            while (!tmp) {
+                                System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
+                                System.out.println("Podaj odleglosc w latach swietlnych");
+                                double odleglosc = scanner1.nextDouble();
+                                if (odleglosc > 0) {
+                                    nowaGwiazda.setOdlegloscwLatachSwietlnych(odleglosc);
+                                    tmp = true;
+                                } else {
+                                    System.out.println("Odleglosc nie moze byc wartoscia ujemna");
+                                }
+
+                            }
+                            tmp = false;
+                            nowaGwiazda.setGwiazdozbior(nazwaGwiazdozbioru.toUpperCase());
+                            while (!tmp) {
+
+                                System.out.println("Podaj temperature. Temperatura minimalna to 2000 (stopni celsjusza)");
+                                double temperatura = scanner1.nextDouble();
+                                if (temperatura >= 2000) {
+                                    nowaGwiazda.setTemperatura(temperatura);
+                                    tmp = true;
+                                } else {
+                                    System.out.println("Temperatura gwiazdy nie moze byc nizsza niz 2000*C");
+                                }
+
+                            }
+                            tmp = false;
+
+                            while (!tmp) {
+                                System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
+                                System.out.println("Podaj mase gwiazdy w odniesieniu do masy slonca.");
+                                System.out.println("Minimalna masa wynosi 0.1, maksymalna 15");
+                                double masa = scanner1.nextDouble();
+                                if (masa < 0.1) {
+                                    System.out.println("Minimalna masa to 0.1");
+                                } else if (masa > 50) {
+                                    System.out.println("Maksymalna masa to 50");
+                                } else {
+                                    nowaGwiazda.setMasa(masa);
+                                    tmp = true;
+                                }
+
+                            }
+                            nowaGwiazda.setAbsolutnaWielkoscGwiazdowa();
+                            nowaGwiazda.setPolkula();
+
+                            g.getGwiazdywGwiazdozbiorze().add(nowaGwiazda);
+                            g.SortujGwiazdy();
+                        }
+                    }
+                    if (czyJestGwiazdozbior == 0) {
+                        System.out.println("Nie znaleziono gwiazdozbioru o nazwie: " + nazwaGwiazdozbioru);
+                    }
+                } else if (wybor == 2) {
+                    Scanner scanner1 = new Scanner(System.in);
+                    System.out.println("Podaj nazwe gwiazdozbioru");
+                    String nazwa = scanner1.nextLine();
+                    ArrayList<Gwiazda> gwiazdy = new ArrayList<>();
+                    DodajGwiazdozbior(gwiazdozbiory, nazwa.toUpperCase(), gwiazdy);
+                } else {
+                    System.out.println("Nie ma takiej funkcji");
+                }
+            }
+
+
+        } catch (InputMismatchException e) {
+            System.out.println("Bledny format danych");
+        }
+    }
+
 
     public static void Wyswietl(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean showLoop = true;
