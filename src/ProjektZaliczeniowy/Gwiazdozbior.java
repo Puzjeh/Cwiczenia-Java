@@ -33,7 +33,7 @@ public class Gwiazdozbior implements Serializable {
         this.nazwaGwiazdozbioru = nazwaGwiazdozbioru;
         this.gwiazdywGwiazdozbiorze = gwiazdywGwiazdozbiorze;
     }
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    private final static TreeMap<Integer, String> map = new TreeMap<>();
     static {
         map.put(0, "ALFA");
         map.put(1, "BETA");
