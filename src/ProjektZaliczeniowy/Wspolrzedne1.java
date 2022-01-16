@@ -1,7 +1,8 @@
 package ProjektZaliczeniowy;
 
 import java.io.Serializable;
-
+//klasa pomocnicza w naszym projekcie
+//sluzy do przechowywania parametrow wspolrzednych dla deklinacji
 public class Wspolrzedne1 implements Serializable {
     private int stopnie;
     private int minuty;

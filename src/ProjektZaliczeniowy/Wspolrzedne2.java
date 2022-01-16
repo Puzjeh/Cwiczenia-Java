@@ -1,7 +1,8 @@
 package ProjektZaliczeniowy;
 
 import java.io.Serializable;
-
+//klasa pomocnicza w naszym projekcie
+//sluzy do przechowywania parametrow rektascensji
 public class Wspolrzedne2 implements Serializable {
     private int godziny;
     private int minuty;

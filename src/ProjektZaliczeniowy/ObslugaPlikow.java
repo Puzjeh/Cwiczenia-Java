@@ -4,8 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class ObslugaPlikow {
+    //funkcja, ktora generuje gwiazdy, nastepnie dodaje je do poszczegolnych gwiazdozbiorow(list) oraz przypisuje je
+    //do listy zawierajacej gwiazdozbiory.
+    //Lista gwiazdozbiorow zostaje zapisana do pliku .obj
     public static void GenerujBaze(){
         ArrayList<Object> gwiazdozbiory = new ArrayList<>();
+        //listy gwiazd poszczegolnych gwiazdozbiorow
         ArrayList<Gwiazda> bliznietaList = new ArrayList<>();
         ArrayList<Gwiazda> hydraList = new ArrayList<>();
         ArrayList<Gwiazda> rakList = new ArrayList<>();
@@ -18,7 +22,7 @@ public class ObslugaPlikow {
         bliznietaList.add(new Gwiazda("OUM5461", 20,8,30,7,5,25,
                 3.45,521, "BLIZNIETA", 15000, 8.2));
 
-        Gwiazdozbior bliznieta = new Gwiazdozbior("BLIZNIETA", bliznietaList);
+        Gwiazdozbior bliznieta = new Gwiazdozbior("BLIZNIETA", bliznietaList);//utworzenie gwiazdozbioru i dodanie do niego list gwiazd
 
         hydraList.add(new Gwiazda("MJK2501", -20,2,50,10,0,10,
                 11.3,231, "HYDRA", 3600, 1.22));
@@ -27,7 +31,7 @@ public class ObslugaPlikow {
         hydraList.add(new Gwiazda("LKM5142", -20,54,6,10,15,26,
                 7.9,452, "HYDRA", 6400, 0.8));
 
-        Gwiazdozbior hydra = new Gwiazdozbior("HYDRA", hydraList);
+        Gwiazdozbior hydra = new Gwiazdozbior("HYDRA", hydraList);//utworzenie gwiazdozbioru i dodanie do niego list gwiazd
 
         rakList.add(new Gwiazda("MJK2501", 20,12,3,8,0,12,
                 -12.4,325, "RAK", 8600, 1.23));
@@ -36,12 +40,12 @@ public class ObslugaPlikow {
         rakList.add(new Gwiazda("PJR7621", 20,5,20,8,15,9,
                 3.1,390, "RAK", 14000, 3.24));
 
-        Gwiazdozbior rak = new Gwiazdozbior("RAK", rakList);
-
+        Gwiazdozbior rak = new Gwiazdozbior("RAK", rakList);//utworzenie gwiazdozbioru i dodanie do niego list gwiazd
+        //dodanie utworzonych gwiazdozbiorow zawierajacych gwiazdy do listy gwiazdozbiorow
         gwiazdozbiory.add(bliznieta);
         gwiazdozbiory.add(hydra);
         gwiazdozbiory.add(rak);
-
+        //zapisanie listy gwiazdozbiorow do pliku .obj
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("bazaGwiazd.obj");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -58,7 +62,8 @@ public class ObslugaPlikow {
             System.out.println("-1");
         }
     }
-
+    //funkcja, ktora odczytuje liste gwiazdozbiorow z pliku .obj
+    //zwraca liste wszystkich gwiazdozbiorow
     public static ArrayList<Gwiazdozbior> OdczytajBaze() throws IOException {
         FileInputStream fileInputStream = new FileInputStream("bazaGwiazd.obj");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -87,7 +92,8 @@ public class ObslugaPlikow {
         System.out.println("Baza zostala odczytana");
         return gwiazdozbiory;
     }
-
+    //funkcja przyjmujaca jako parametr liste gwiazdozbiorow
+    //nadpisuje ona plik .obj dzieki czemu wprowadzone zmiany zostaja zachowane
     public static void ZapiszZmiany(ArrayList<Gwiazdozbior> gwiazdozbiory){
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("bazaGwiazd.obj");
@@ -105,7 +111,9 @@ public class ObslugaPlikow {
             System.out.println("-1");
         }
     }
-
+    //funkcja przyjmujaca jako parametr liste gwiazdozbiorow
+    //zapisuje ona wszystkie gwiazdy podzielone na gwiazdozbiory
+    //w kolejnosci nazw katalogowych
     public static void ZapiszDoPlikuTXT(ArrayList<Gwiazdozbior> gwiazdozbiory) throws IOException {
         FileWriter fi = new FileWriter(("Gwiazdy.txt"));
         for (Gwiazdozbior g : gwiazdozbiory) {
