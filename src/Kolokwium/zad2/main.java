@@ -2,33 +2,29 @@ package Kolokwium.zad2;
 
 
 import java.util.Random;
-import java.util.Scanner;
+
 
 public class main {
-    public static void main(String[] args){
-        System.out.println("Podaj k");
-        Scanner scanner = new Scanner(System.in);
-        int k=scanner.nextInt();
+    public static void Tablice(int k, int n, int m){
+
         boolean[] wartosciBool = new boolean[k];
         Random rand = new Random();
+        System.out.print("Wartosci tablicy 1d:");
         for(int i = 0; i< wartosciBool.length; i++){
             double liczba = rand.nextDouble();
             if(liczba < 0.75){
                 wartosciBool[i] = true;
-                System.out.println(wartosciBool[i]);
             }else{
                 wartosciBool[i] = false;
-                System.out.println(wartosciBool[i]);
             }
+            System.out.print(wartosciBool[i] + " ");
         }
-        System.out.println("Podaj n");
-        int n = scanner.nextInt();
-        System.out.println("Podaj m");
-        int m = scanner.nextInt();
+        System.out.println(" ");
 
         if(k == n*m){
             boolean[][] wartosciBool2D = new boolean[n][m];
             int indexWartosci = 0;
+            System.out.println("Wartosci tablicy 2d:");
             for(int i = 0; i<n;i++){
                 for(int y = 0; y<m; y++){
                     wartosciBool2D[i][y] = wartosciBool[indexWartosci];
@@ -40,6 +36,11 @@ public class main {
         }else{
             System.out.println("n*m nie jest rowne k");
         }
+    }
+
+    public static void main(String[] args){
+        Tablice(10,2,5);
+        Tablice(22,3,7);
 
     }
 }

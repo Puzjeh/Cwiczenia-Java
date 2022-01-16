@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.TreeMap;
-
+//klasa gwiazdozbior ktora ma za zadanie przechowywac poszczegolne gwiazdy w swoich gwiazdozbiorach
 public class Gwiazdozbior implements Serializable {
     private String nazwaGwiazdozbioru;
     private ArrayList<Gwiazda> gwiazdywGwiazdozbiorze;
@@ -33,6 +33,9 @@ public class Gwiazdozbior implements Serializable {
         this.nazwaGwiazdozbioru = nazwaGwiazdozbioru;
         this.gwiazdywGwiazdozbiorze = gwiazdywGwiazdozbiorze;
     }
+
+    //mapa przechowujaca kolejne litery greckiego alfabetu
+    //sluzy do generowania nazw katalogowych na podstawie indeksu w liscie gwiazd w gwiazdozbiorze
     private final static TreeMap<Integer, String> map = new TreeMap<>();
     static {
         map.put(0, "ALFA");
@@ -60,7 +63,8 @@ public class Gwiazdozbior implements Serializable {
         map.put(22, "PSI");
         map.put(23, "OMEGA");
     }
-
+    //metoda aktualizujaca nazwy katalogowe gwiazd w gwiazdozbiorze dla ktorego zostanie wywolana
+    //zwraca liste gwiazd, ktora nastepnie poprzez setter przekazuujemy do gwiazdozbioru
     public ArrayList<Gwiazda> SortujGwiazdy(){
         ArrayList<Gwiazda> posortowaneNazwy = getGwiazdywGwiazdozbiorze();
         for(int i = 0; i< posortowaneNazwy.size();i++){
@@ -68,7 +72,8 @@ public class Gwiazdozbior implements Serializable {
         }
         return posortowaneNazwy;
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //wyswietla wszystkie gwiazdy w kolejnych gwiazdozbiorach z listy
     public static void WyswietlWszystkieGwiazdy(ArrayList<Gwiazdozbior> gwiazdozbiory){
         for(Gwiazdozbior g : gwiazdozbiory){
             for(Gwiazda gw : g.getGwiazdywGwiazdozbiorze()){
@@ -77,7 +82,9 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //uzytkownik podaje odleglosc w parsekach, ktore sa zamieniane na lata swietlne
+    //wyswietla na konsoli wszystkie gwiazdy jakie mozemy spotkac w zadanej odleglosci
     public static void WyswietlGwiazdywOdleglosci(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean tmp = true;
         boolean czyJestGwiazda = false;
@@ -109,7 +116,8 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //wyswietla gwiazdy z przedzialu temperatury ktora uzytkownik przekazuje przez konsole
     public static void WyswietlGwiazdywPrzedzialeTemperatury(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean tmp = true;
         boolean czyJestGwiazda = false;
@@ -143,7 +151,8 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //wyswietla gwiazdy z zadanego przez uzytkownika poprzez konsole przedzialu wielkosci
     public static void WyswietlGwiazdywPrzedzialeWielkosci(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean tmp = true;
         boolean czyJestGwiazda = false;
@@ -178,7 +187,8 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //wyswietla w konsoli wszystkie gwiazdy wedlug zadanej przez uzytkownika poprzez konsole polkuli
     public static void WyswietlGwiazdyWedlugPolkuli(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean tmp = true;
         boolean czyJestGwiazda = false;
@@ -212,14 +222,16 @@ public class Gwiazdozbior implements Serializable {
 
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow i wyswietlajaca ich nazwy
     public static void WyswietlNazwyGwiazdozbiorow(ArrayList<Gwiazdozbior> gwiazdozbiory){
         System.out.println("Gwiazdozbiory w bazie:");
         for(Gwiazdozbior g : gwiazdozbiory){
             System.out.println(g.getNazwaGwiazdozbioru());
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //uzytkownik wpisuje w konsoli nazwe gwiazdozbioru z wyswietlonej listy,
+    //nastepnie wyswietlaja sie gwiazdy w podanym gwiazdozbiorze
     public static void WyswietlGwiazdywGwiazdozbiorze(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean tmp = true;
         boolean czyJestGwiazdozbior = false;
@@ -247,7 +259,8 @@ public class Gwiazdozbior implements Serializable {
             }
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //wyswietla na konsoli wszystkie potencjalne supernowy
     public static void WyswietlSupernowe(ArrayList<Gwiazdozbior> gwiazdozbiory){
         int ileGwiazd = 0;
         for(Gwiazdozbior g : gwiazdozbiory){
@@ -262,7 +275,8 @@ public class Gwiazdozbior implements Serializable {
             System.out.println("W bazie nie ma potencjalnych supernow");
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //pozwala na usuniecie gwiazdy z bazy
     public static void UsunGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory){
 
         boolean deleteLoop = true;
@@ -270,7 +284,7 @@ public class Gwiazdozbior implements Serializable {
             System.out.println("Podaj nazwe katalogowa gwiazdy ktora chcesz usunac z bazy");
             System.out.println("0--Wroc");
             Scanner scanner = new Scanner(System.in);
-            String gwiazda = scanner.nextLine();
+            String gwiazda = scanner.nextLine();//odczytanie nazwy katalogowej gwiazdy
             boolean tmp = true;
             if(gwiazda.equalsIgnoreCase("0")){
                 break;
@@ -278,16 +292,24 @@ public class Gwiazdozbior implements Serializable {
                 Gwiazda doUsuniecia = new Gwiazda();
                 for(Gwiazdozbior g : gwiazdozbiory) {
                     for (Gwiazda gw : g.getGwiazdywGwiazdozbiorze()) {
+                        //przeszukanie wszystkich gwiazd w bazie
+                        //jezeli nazwa katalogowa gwiazdy jest taka jak podana
+                        //kopiujemy obiekt do zmiennej doUsuniecia
                         if (gw.getNazwaKatalogowa().equalsIgnoreCase(gwiazda)) {
                             doUsuniecia = gw;
                         }
                     }
+                    //usuwamy gwiazde i sprawdzamy czy operacja sie powiodla
+                    //jesli tak, to dzieki zmiennym pomocniczym opuszczamy petle usuwania
+                    //oraz dajemy sygnal o powodzeniu operacji
                     if(g.getGwiazdywGwiazdozbiorze().remove(doUsuniecia)){
                         tmp = false;
                         deleteLoop = false;
                     }
-                    g.setGwiazdywGwiazdozbiorze(g.SortujGwiazdy());
+                    g.setGwiazdywGwiazdozbiorze(g.SortujGwiazdy());//aktualizujemy nazwy katalogowe gwiazd w gwiazdozbiorze
                 }
+                //dzieki zmiennej pomocniczej odczytujemy sygnal o powodzeniu operacji usuwania
+                //wyswietlamy komunikat
                 if(!tmp){
                     System.out.println("Gwiazda zostala usunieta");
                 }else{
@@ -295,22 +317,23 @@ public class Gwiazdozbior implements Serializable {
                     UsunGwiazde(gwiazdozbiory);
                 }
             }
-
         }
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow, nazwe nowego gwiazdozbioru oraz liste gwiazd
+    //tworzy nowy obiekt typu gwiazdozbior, nadaje mu parametry i dodaje go do listy gwiazdozbiorow
     public static void DodajGwiazdozbior(ArrayList<Gwiazdozbior> gwiazdozbiory, String nazwa, ArrayList<Gwiazda> gwiazdy){
         Gwiazdozbior nowyGwiazdozbior = new Gwiazdozbior();
         nowyGwiazdozbior.setNazwaGwiazdozbioru(nazwa);
         nowyGwiazdozbior.setGwiazdywGwiazdozbiorze(gwiazdy);
         gwiazdozbiory.add(nowyGwiazdozbior);
     }
-
+    //funkcja przyjmujaca liste gwiazdozbiorow
+    //tworzy nowa gwiazde i dodaje ja do listy gwiazd w poszczegolnym gwiazdozbiorze
     public static void DodajGwiazde(ArrayList<Gwiazdozbior> gwiazdozbiory) {
         try {
-            boolean addLoop = true;
+            boolean addLoop = true;//zmienna pomocnicza do sterowania petla
             while (addLoop) {
-                Gwiazda nowaGwiazda = new Gwiazda();
+                Gwiazda nowaGwiazda = new Gwiazda();//stworzenie nowego obiektu klasy gwiazda
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("1--Wybierz gwiazdozbior z bazy");
                 System.out.println("2--Stworz nowy gwiazdozbior");
@@ -319,14 +342,19 @@ public class Gwiazdozbior implements Serializable {
                 if (wybor == 0) {
                     addLoop = false;
                 } else if (wybor == 1) {
+                    //wyswietla gwiazdozbiory i przyjmuje nazwe gwiazdozbioru do ktorego chcemy dodac gwiazde
                     WyswietlNazwyGwiazdozbiorow(gwiazdozbiory);
                     Scanner scanner1 = new Scanner(System.in);
                     System.out.println("Podaj nazwe gwiazdozbioru");
                     String nazwaGwiazdozbioru = scanner1.nextLine();
-                    int czyJestGwiazdozbior = 0;
+                    int czyJestGwiazdozbior = 0;//zmienna pomocnicza
                     for (Gwiazdozbior g : gwiazdozbiory) {
-                        if (g.getNazwaGwiazdozbioru().contains(nazwaGwiazdozbioru.toUpperCase())) {
+                        if (g.getNazwaGwiazdozbioru().contains(nazwaGwiazdozbioru.toUpperCase())) {//sprawdzenie czy istnieje gwiazdozbior podany przez uzytkownika
                             czyJestGwiazdozbior++;
+                            //sekwencja dodawania parametrow do nowej gwiazdy
+                            //sprawdzanie warunkow dla kazdego parametru w petlach
+                            //kazda petla sterowana jest kolejna zmienna pomocnicza
+                            //wpisywanie parametrow odbywa sie do momentu az podany parametr bedzie spelnial warunki
                             boolean tmp = false;
                             while (!tmp) {
                                 System.out.println("Nazwa gwiazdy powinna skladac sie z 3 duzych liter i 4 cyfr");
@@ -345,15 +373,13 @@ public class Gwiazdozbior implements Serializable {
                                 if (ileLiter != 3 || ileCyfr != 4) {
                                     System.out.println("Błedna nazwa");
                                 } else {
-                                    nowaGwiazda.setNazwa(nazwa);
+                                    nowaGwiazda.setNazwa(nazwa);//nadanie nazwy gwiazdy
                                     tmp = true;
                                 }
                             }
 
                             tmp = false;
-
                             while (!tmp) {
-
                                 System.out.println("Podaj deklinacje (stopnie, minuty, sekundy");
                                 System.out.println("Kazda wartosc zatwierdz");
                                 System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
@@ -362,75 +388,68 @@ public class Gwiazdozbior implements Serializable {
                                 double sekundy = scanner1.nextDouble();
                                 if (stopnie >= -90 && stopnie <= 90 && minuty >= -60 && minuty <= 60 &&
                                         sekundy >= -60 && sekundy <= 60) {
-                                    nowaGwiazda.setDeklinacja(stopnie, minuty, sekundy);
+                                    nowaGwiazda.setDeklinacja(stopnie, minuty, sekundy);//nadanie deklinacji
                                     tmp = true;
                                 } else {
                                     System.out.println("Niepoprawne wartosci wspolrzednej");
                                 }
-
                             }
+
                             tmp = false;
-
                             while (!tmp) {
-
                                 System.out.println("Podaj rektascensje (godziny, minuty, sekundy");
                                 int godziny = scanner.nextInt();
                                 int minuty = scanner1.nextInt();
                                 int sekundy = scanner1.nextInt();
                                 if (godziny >= 0 && godziny <= 24 && minuty >= 0 && minuty <= 60 && sekundy >= 0 && sekundy <= 60) {
-                                    nowaGwiazda.setRektascensja(godziny, minuty, sekundy);
+                                    nowaGwiazda.setRektascensja(godziny, minuty, sekundy);//nadanie rektascensji
                                     tmp = true;
                                 } else {
                                     System.out.println("Niepoprawne wartosci wspolrzednej");
                                 }
-
                             }
+
                             tmp = false;
-
                             while (!tmp) {
-
                                 System.out.println("Obserwowana wielkosc gwiazdowa przyjmuje wartosci od -26.74 do 15.0");
                                 System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
                                 System.out.println("Podaj obserwowana wielkosc gwiazdowa");
                                 double wielkosc = scanner1.nextDouble();
                                 if (wielkosc >= -26.74 && wielkosc <= 15.00) {
-                                    nowaGwiazda.setObserwowanaWielkoscGwiazdowa(wielkosc);
+                                    nowaGwiazda.setObserwowanaWielkoscGwiazdowa(wielkosc);//nadanie obserwowanej wielkosci gwiazdowej
                                     tmp = true;
                                 } else {
                                     System.out.println("Wartosc spoza zakresu");
                                 }
-
                             }
-                            tmp = false;
 
+                            tmp = false;
                             while (!tmp) {
                                 System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
                                 System.out.println("Podaj odleglosc w latach swietlnych");
                                 double odleglosc = scanner1.nextDouble();
                                 if (odleglosc > 0) {
-                                    nowaGwiazda.setOdlegloscwLatachSwietlnych(odleglosc);
+                                    nowaGwiazda.setOdlegloscwLatachSwietlnych(odleglosc);//nadanie odleglosci w latach swietlnych
                                     tmp = true;
                                 } else {
                                     System.out.println("Odleglosc nie moze byc wartoscia ujemna");
                                 }
-
                             }
-                            tmp = false;
-                            nowaGwiazda.setGwiazdozbior(nazwaGwiazdozbioru.toUpperCase());
-                            while (!tmp) {
 
+                            tmp = false;
+                            nowaGwiazda.setGwiazdozbior(nazwaGwiazdozbioru.toUpperCase());//nadanie gwiazdozbioru
+                            while (!tmp) {
                                 System.out.println("Podaj temperature. Temperatura minimalna to 2000 (stopni celsjusza)");
                                 double temperatura = scanner1.nextDouble();
                                 if (temperatura >= 2000) {
-                                    nowaGwiazda.setTemperatura(temperatura);
+                                    nowaGwiazda.setTemperatura(temperatura);//nadanie temperatury
                                     tmp = true;
                                 } else {
                                     System.out.println("Temperatura gwiazdy nie moze byc nizsza niz 2000*C");
                                 }
-
                             }
-                            tmp = false;
 
+                            tmp = false;
                             while (!tmp) {
                                 System.out.println("Cyfry oddzielamy przecinkiem, nie kropką");
                                 System.out.println("Podaj mase gwiazdy w odniesieniu do masy slonca.");
@@ -441,39 +460,39 @@ public class Gwiazdozbior implements Serializable {
                                 } else if (masa > 50) {
                                     System.out.println("Maksymalna masa to 50");
                                 } else {
-                                    nowaGwiazda.setMasa(masa);
+                                    nowaGwiazda.setMasa(masa);//nadanie masy
                                     tmp = true;
                                 }
-
                             }
-                            nowaGwiazda.setAbsolutnaWielkoscGwiazdowa();
-                            nowaGwiazda.setPolkula();
+                            nowaGwiazda.setAbsolutnaWielkoscGwiazdowa();//nadanie absolutnej wielkosci gwiazdowej
+                            nowaGwiazda.setPolkula();//nadanie polkuli
 
-                            g.getGwiazdywGwiazdozbiorze().add(nowaGwiazda);
-                            g.SortujGwiazdy();
+                            g.getGwiazdywGwiazdozbiorze().add(nowaGwiazda);//dodanie gwiazdy do gwiazdozbioru
+                            g.SortujGwiazdy();//zaktualizowanie nazw katalogowych w gwiazdozbiorze
                         }
                     }
-                    if (czyJestGwiazdozbior == 0) {
+                    if (czyJestGwiazdozbior == 0) {//komunikat o blednej nazwie gwiazdozbioru
                         System.out.println("Nie znaleziono gwiazdozbioru o nazwie: " + nazwaGwiazdozbioru);
                     }
-                } else if (wybor == 2) {
+                } else if (wybor == 2) {//Utworzenie nowego gwiazdozbioru
                     Scanner scanner1 = new Scanner(System.in);
                     System.out.println("Podaj nazwe gwiazdozbioru");
                     String nazwa = scanner1.nextLine();
                     ArrayList<Gwiazda> gwiazdy = new ArrayList<>();
-                    DodajGwiazdozbior(gwiazdozbiory, nazwa.toUpperCase(), gwiazdy);
+                    DodajGwiazdozbior(gwiazdozbiory, nazwa.toUpperCase(), gwiazdy);//funkcja dodajaca nowy gwiazdozbior
                 } else {
                     System.out.println("Nie ma takiej funkcji");
                 }
             }
-
-
+            //catch lapiacy bledy formatu, np oddzielenie cyfr kropka zamiast przecinku, podanie litery zamiast cyfry
+            //dzieki niemu w takim wypadku petla dodawania sie przerywa, zamiast crashowac caly program
         } catch (InputMismatchException e) {
             System.out.println("Bledny format danych");
         }
     }
 
-
+    //funkcja sluzaca do wyswietlania wybranych rzeczy na konsoli
+    //zawiera w sobie kolejne menu z racji na ilosc mozliwych wyborow
     public static void Wyswietl(ArrayList<Gwiazdozbior> gwiazdozbiory){
         boolean showLoop = true;
         while(showLoop) {

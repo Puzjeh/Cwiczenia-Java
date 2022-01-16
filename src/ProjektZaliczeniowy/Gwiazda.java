@@ -15,11 +15,11 @@ public class Gwiazda implements Serializable {
     private String polkula;
     private double temperatura;
     private double masa;
-
+    //konstruktor bezparametrowy na ktorym bazujemy przy dodawaniu nowej gwiazdy
     public Gwiazda() {
 
     }
-
+    //konstruktor wykorzystywany do wygenerowania podstawowej bazy gwiazd przy pierwszym uruchomieniu programu
     public Gwiazda(String nazwa, int stopnie, int minuty, double sekundy, int godziny, int minutyy, int sekundyy,
                    double obserwowanaWielkoscGwiazdowa, double odlegloscwLatachSwietlnych, String gwiazdozbior,
                    double temperatura, double masa) {
@@ -35,22 +35,8 @@ public class Gwiazda implements Serializable {
         this.polkula = setPolkula();
     }
 
-    public Gwiazda(Gwiazda drugaGwiazda) {
-        this.nazwa = drugaGwiazda.getNazwa();
-        this.nazwaKatalogowa = drugaGwiazda.getNazwaKatalogowa();
-        this.deklinacja = drugaGwiazda.getDeklinacja();
-        this.rektascensja = drugaGwiazda.getRektascensja();
-        this.obserwowanaWielkoscGwiazdowa = drugaGwiazda.getObserwowanaWielkoscGwiazdowa();
-        this.absolutnaWielkoscGwiazdowa = drugaGwiazda.getAbsolutnaWielkoscGwiazdowa();
-        this.odlegloscwLatachSwietlnych = drugaGwiazda.getOdlegloscwLatachSwietlnych();
-        this.gwiazdozbior = drugaGwiazda.getGwiazdozbior();
-        this.polkula = drugaGwiazda.getPolkula();
-        this.temperatura = drugaGwiazda.getTemperatura();
-        this.masa = drugaGwiazda.getMasa();
-    }
 
     public String getNazwa() {
-
         return nazwa;
     }
 
@@ -93,7 +79,7 @@ public class Gwiazda implements Serializable {
     public double getAbsolutnaWielkoscGwiazdowa() {
         return absolutnaWielkoscGwiazdowa;
     }
-
+    //setter ktory na podstawie parametrow obiektu ustala absolutna wielkosc gwiazdowa
     public double setAbsolutnaWielkoscGwiazdowa() {
         double a = obserwowanaWielkoscGwiazdowa - 5*(Math.log10((odlegloscwLatachSwietlnych/3.26)))+5;
         return this.absolutnaWielkoscGwiazdowa = Math.round(a*100.00)/100.00;
@@ -119,7 +105,7 @@ public class Gwiazda implements Serializable {
     public String getPolkula() {
         return polkula;
     }
-
+    //setter, ktory na podstawie pozostalych parametrow obiektu ustala z ktorej polkuli widoczna jest gwiazda
     public String setPolkula() {
         int stopnie = getDeklinacja().getStopnie();
         int minuty = getDeklinacja().getMinuty();
@@ -159,7 +145,7 @@ public class Gwiazda implements Serializable {
     public void setMasa(double masa) {
         this.masa=masa;
     }
-
+    //nadpisanie metody toString(), ktora pozwala wyswietlic wszystkie informacje o naszej gwiezdzie na konsoli
     @Override
     public String toString() {
         return
